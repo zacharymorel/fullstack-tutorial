@@ -8,6 +8,18 @@ const typeDefs = gql`
     me: User
   }
 
+  type Mutation {
+    bookTrips(launchIds: [ID]!): TripUpdateResponse!
+    cancelTrip(launchId: ID!): TripUpdateResponse!
+    login(email: String): User
+  }
+
+  type TripUpdateResponse {
+    success: Boolean!
+    message: String
+    launches: [Launch]
+  }
+
   type Launch {
     id: ID!
     site: String
