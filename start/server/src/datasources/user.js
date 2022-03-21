@@ -32,10 +32,7 @@ class UserAPI extends DataSource {
   }
 
   async bookTrips({ launchIds }) {
-    console.log("this.context: ", this.context);
-
-    const userId = this.context.user.id;
-    if (!userId) return;
+    if (!this.context || !this.context.user || !this.context.user.id) return [];
 
     let results = [];
 
@@ -49,7 +46,7 @@ class UserAPI extends DataSource {
     return results;
   }
   async bookTrip({ launchId }) {
-    const userId = this.context.user.id;
+    if (!this.context || !this.context.user || !this.context.user.id) return [];
     const res = await this.store.trips.findOrCreate({
       where: { userId, launchId },
     });
